@@ -1,0 +1,10 @@
+:root {
+  --accent-color: rgb(52, 84, 122);
+  --accent-bg-color: rgba(52, 84, 122, 0.8);
+  --second-bg-color: #eeeff1;
+  --text-color: #727272;
+
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
