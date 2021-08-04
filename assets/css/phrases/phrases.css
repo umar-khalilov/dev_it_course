@@ -1,0 +1,18 @@
+.phrases-container {
+  background-color: var(--accent-bg-color);
+  color: whitesmoke;
+  padding: 30px 20px;
+}
+
+.top-heading {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: xx-large;
+  font-weight: 900;
+  text-align: center;
+  color: black;
+}
+
+.catch-phrases {
+  font-size: x-large;
+  padding: 10px;
+}
