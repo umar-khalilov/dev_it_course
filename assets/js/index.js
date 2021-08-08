@@ -30,5 +30,5 @@ showSlides(slideIndex)
 const plusSlides = (num) => showSlides(slideIndex += num);
 const currentSlide = (num) => showSlides(slideIndex = num);
 
-nextSlide.addEventListener("click", () => plusSlides(1));
+nextSlide.addEventListener("click", () => plusSlides(+1));
 prevSlide.addEventListener('click', () => plusSlides(-1));
