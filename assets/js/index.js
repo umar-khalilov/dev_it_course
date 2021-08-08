@@ -16,19 +16,19 @@ const showSlides = num => {
     }
 
     slides.forEach((slide) => slide.style.display = 'none');
-    images.forEach((image, index) => {
+    images.forEach((image) => {
         image.className = image.className.replace("active", "");
     })
 
     slides[slideIndex - 1].style.display = 'block';
-    images[slideIndex - 1].className += ' active';
+    images[slideIndex - 1].className += 'active';
     captionText.innerHTML = images[slideIndex - 1].alt;
 }
 
-showSlides(slideIndex);
+showSlides(slideIndex)
 
 const plusSlides = (num) => showSlides(slideIndex += num);
 const currentSlide = (num) => showSlides(slideIndex = num);
 
-nextSlide.addEventListener("click", () => plusSlides(+1));
+nextSlide.addEventListener("click", () => plusSlides(1));
 prevSlide.addEventListener('click', () => plusSlides(-1));
