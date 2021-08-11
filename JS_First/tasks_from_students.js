@@ -29,3 +29,6 @@ const isString = (string) => typeof string === 'string';
 console.log(isString("lala"));
 
 //3
+const createAbbreviation = (name, surName) => `Your Abbreviation: ${name.slice(0, 1)} ${surName.slice(0, 1)}` ;
+
+console.log(createAbbreviation("John", "Dou"))
