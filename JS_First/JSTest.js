@@ -60,7 +60,7 @@ class JSTest {
         if (isNaN(from + to)) {
             return null;
         }
-        const distance = to - from;
+        const distance = Math.ceil(to - from);
         if (distance === 1) {
             return 1;
         }
