@@ -2,14 +2,14 @@ class JSTest {
     /*Задачи для работы со строками */
 // 1. Функция меняет регистр букв переданой строки - если буква в верхнем - перевод в нижний и наоборот (teSTsTRing -> TEstStrING)
     static getChangeCaseString = (string) => {
-        let character = '';
-        let changedCaseString = '';
         if (typeof string === 'object' ||
             typeof string === 'undefined' ||
             typeof string === 'function' ||
             typeof string === 'boolean') {
             throw new TypeError("You entered wrong data")
         }
+        let character = '';
+        let changedCaseString = '';
         for (let i = 0; i < string.length; i++) {
             character = string.charAt(i);
             if (!isNaN(character * 1)) {
@@ -143,4 +143,7 @@ class JSTest {
             return null;
         }
     }
+
+
+
 }

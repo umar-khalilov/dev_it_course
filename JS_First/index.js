@@ -12,6 +12,17 @@ console.log(Number.MAX_VALUE);
 const eq = (a, b) => (Math.abs(a) - Math.abs(b)) < Number.EPSILON;
 console.log(eq(0.1 + 0.2, 0.3));
 
+const pow = (base, exp) => {
+    if (exp === 1) {
+        return base;
+    }
+    if (exp === 0) {
+        return 1;
+    }
+    return base * pow(base, exp - 1);
+}
+
+console.log(pow(2,3))
 
 const getSeqFib = (upNum) => {
     let num1 = 0;
@@ -29,8 +40,6 @@ const getSeqFib = (upNum) => {
 
 const calcSumSequence = (num) => num === 1 ? num : num + calcSumSequence(num - 1);
 
-console.log(calcSumSequence(4))
-
 const createMultiplicationTable = (upperLimit) => {
     for (let i = 1; i <= 10; i++) {
         for (let j = 1; j <= upperLimit; j++) {
@@ -39,20 +48,6 @@ const createMultiplicationTable = (upperLimit) => {
         console.log('\n')
     }
 }
-
-createMultiplicationTable(9);
-
-const pow = (base, exp) => {
-    if (exp === 1) {
-        return base;
-    }
-    if (exp === 0) {
-        return 1;
-    }
-    return base * pow(base, exp - 1);
-}
-
-console.log(pow(2,3))
 
 
 

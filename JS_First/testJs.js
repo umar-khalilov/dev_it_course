@@ -1,16 +1,16 @@
 //String
 console.log(JSTest.getChangeCaseString("teSTsTRing"));
 
-console.log(JSTest.isString("lala"));
+// console.log(JSTest.isString("lala"));
 
-console.log(JSTest.createAbbreviation("John", "Dou"));
+// console.log(JSTest.createAbbreviation("John", "Dou"));
 
 //Number
-console.log(JSTest.generateIntNumber(250, 255, 16));
+// console.log(JSTest.generateIntNumber(250, 255, 16));
 
-console.log(JSTest.getNegativeNumber(3));
+// console.log(JSTest.getNegativeNumber(3));
 
-console.log(JSTest.calcDistanceAndGetFactorial(1, 6));
+// console.log(JSTest.calcDistanceAndGetFactorial(1, 6));
 
 //Array
 const arr = [
@@ -51,30 +51,30 @@ const testData = [
         ],
     ]
 ];
-console.log(JSTest.getFoldedArray(arr));
+// console.log(JSTest.getFoldedArray(arr));
 
-console.log(JSTest.getFoldedArray(testData));
+// console.log(JSTest.getFoldedArray(testData));
 
-console.log(JSTest.reverseArrToXAndY(arr));
+// console.log(JSTest.reverseArrToXAndY(arr));
 
 //Date
-console.log(JSTest.getDayOfWeek());
+// console.log(JSTest.getDayOfWeek());
 
-console.log(JSTest.amountSecondTillTomorrow());
+// console.log(JSTest.amountSecondTillTomorrow());
 
-console.log(JSTest.getTheLastDayOfTheMonth(2021,7));
+// console.log(JSTest.getTheLastDayOfTheMonth(2021,7));
 
 //Closure
-const counter = JSTest.makeCounter(10);
-console.log(counter().increment());
-console.log(counter().increment());
-console.log(counter().reset());
+// const counter = JSTest.makeCounter(10);
+// console.log(counter().increment());
+// console.log(counter().increment());
+// console.log(counter().reset());
 
-console.log(JSTest.getSeqFibonacci());
-console.log(JSTest.getSeqFibonacci());
-console.log(JSTest.getSeqFibonacci());
+// console.log(JSTest.getSeqFibonacci());
+// console.log(JSTest.getSeqFibonacci());
+// console.log(JSTest.getSeqFibonacci());
 
-const random = JSTest.makeRandom();
-console.log(random());
-console.log(random());
-console.log(random());
+// const random = JSTest.makeRandom();
+// console.log(random());
+// console.log(random());
+// console.log(random());
