@@ -29,7 +29,7 @@ class JSTest {
     static isString = (string) => typeof string === 'string';
 
     // 3. Функция которая создает абревиатуру от переданного имени и фамилии - John Dou - John D.
-    static createAbbreviation = (name, surName) => `Your Abbreviation: ${name.slice(0, 1)} ${surName.slice(0, 1)}`;
+    static createAbbreviation = (name, surName) => `Your Abbreviation: ${name[0]} ${surName[0]}`;
 
     // Задачи для работы с числами
     // 1. Сгенерировать случайное целое число в указанном диапазоне и перевести его в указанную систему счисления
