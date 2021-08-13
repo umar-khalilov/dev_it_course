@@ -6,3 +6,4 @@
 const protectEmail = (email, replacer) => email.replaceAll(/[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}][^com$]/gumi, replacer);
 
 console.log(protectEmail("robin_singh@example.com", "#"));
+
