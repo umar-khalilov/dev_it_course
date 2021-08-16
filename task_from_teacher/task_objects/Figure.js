@@ -4,7 +4,7 @@
 должны быть реализованы методы area и perimeter и метод toJSON который вернет всю информацию об объекте.
     П.С сделать два вариата реализации с помощью function и class*/
 class Figure {
-    color;
+    color = '';
 
     constructor(color) {
         this.color = color;
@@ -16,11 +16,11 @@ class Figure {
     getPerimeter() {
     }
     toJSON(){
-        return {
-            color:this.color,
-            getArea:this.getArea(),
-            getPerimeter:this.getPerimeter()
-        }
+       return  JSON.stringify({
+           ...this,
+           getArea: this.getArea(),
+           getPerimeter: this.getPerimeter()
+       })
     }
 }
 
@@ -42,12 +42,6 @@ class Circle extends Figure {
         return Math.PI * this.circleRadius * 2;
     }
 
-    toJSON() {
-        return {
-            super: super.toJSON(),
-            circleRadius: this.circleRadius,
-        }
-    }
 }
 
 class Ellipse extends Figure {
@@ -71,13 +65,6 @@ class Ellipse extends Figure {
             / (this.semiMajorAxisLength + this.semiMinorAxisLength);
     }
 
-    toJSON() {
-        return {
-            super: super.toJSON(),
-            semiMajorAxisLength: this.semiMajorAxisLength,
-            semiMinorAxisLength: this.semiMinorAxisLength,
-        }
-    }
 }
 
 class Square extends Figure {
@@ -96,11 +83,6 @@ class Square extends Figure {
     getPerimeter() {
         super.getPerimeter();
         return this.side * 4;
-    }
-
-
-    toJSON() {
-        return {super: super.toJSON(), side:this.side}
     }
 
 }
@@ -125,14 +107,6 @@ class Rectangle extends Figure {
         return 2 * (this.width + this.height);
     }
 
-    toJSON() {
-        return {
-            super: super.toJSON(),
-            width: this.width,
-            height: this.height,
-
-        }
-    }
 }
 
 class Trapezoid extends Figure {
@@ -161,16 +135,6 @@ class Trapezoid extends Figure {
         return this.baseA + this.baseB + this.sideC + this.sideD;
     }
 
-    toJSON() {
-        return {
-            super: super.toJSON(),
-            baseA: this.baseA,
-            baseB: this.baseB,
-            sideC: this.sideC,
-            sideD: this.sideD,
-            height: this.height,
-        }
-    }
 }
 
 class Triangle extends Figure {
@@ -197,17 +161,7 @@ class Triangle extends Figure {
         return (this.baseB * this.height) / 2;
     }
 
-
-    toJSON() {
-        return {
-            super: super.toJSON(),
-            baseB: this.baseB,
-            sideA: this.sideA,
-            sideC: this.sideC,
-            height: this.height,
-        }
-    }
 }
 
 const square = new Square('red', 10);
-console.log(JSON.stringify(square))
+console.log(square.toJSON())
