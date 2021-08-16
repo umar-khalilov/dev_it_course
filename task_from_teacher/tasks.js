@@ -2,7 +2,7 @@
 
 /*1. Написать метод защиты email (например для не залогиненых пользователей)
 Синтаксис: protect_email(email: string, replacer: string = '*' ): string*/
-const protectEmail = (email, replacer) => email.replaceAll(/[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}][^com$]/gumi, replacer);
+const protectEmail = (email, replacer) => email.replaceAll(/[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}][^.com$]/gumi, replacer);
 
 console.log(protectEmail("robin_singh@example.com", "#"));
 
