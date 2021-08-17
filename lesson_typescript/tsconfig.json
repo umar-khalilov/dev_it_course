@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es3",
+    "outDir": "build",
+    "outFile": "bundle.js",
+    "pretty": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true
+  }
+}
