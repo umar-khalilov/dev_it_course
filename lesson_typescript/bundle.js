@@ -1,18 +1,18 @@
 "use strict";
 //Boolean
-var bool = true;
+let bool = true;
 console.log(bool);
 //String
-var str = 'lalala';
+let str = 'lalala';
 console.log(str);
 //Number
-var num = 10;
+let num = 10;
 console.log(num);
 //Array
-var arrN = [1, 2, 3, 4, 5];
-var arrS = ['rgw', 'wfw', 'fwf'];
+let arrN = [1, 2, 3, 4, 5];
+let arrS = ['rgw', 'wfw', 'fwf'];
 console.log(arrS, arrN);
-var x = [1, 'str'];
+let x = [1, 'str'];
 //Enum
 var Week;
 (function (Week) {
@@ -24,7 +24,7 @@ var Week;
     Week["FRIDAY"] = "\u041F\u044F\u0442\u043D\u0438\u0446\u0430";
     Week["SATURDAY"] = "\u0421\u0443\u0431\u0431\u043E\u0442\u0430";
 })(Week || (Week = {}));
-var s = Week.TUESDAY;
+const s = Week.TUESDAY;
 console.log(s);
-var a = 32;
-var b = 4;
+let a = 32;
+let b = 4;

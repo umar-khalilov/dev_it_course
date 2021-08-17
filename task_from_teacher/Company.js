@@ -16,17 +16,64 @@
 - метод toJSON выводит структуру в виде json
 - метод toObject возвращает JS обьект компании*/
 class Company {
-    manager1 = new Manager('lolo', 'pepe', 30, '3242342', 'test@mail.com', 100,
-        'PM', 'Project manager');
-    manager2 = new Manager('lolo', 'pepe', 30, '3242342', 'test@mail.com', 100,
-        'PM', 'Project manager')
-    boss;
-    programmer;
-    security;
-
     constructor(name, address) {
         this.name = name;
         this.address = address;
+        this.employees = [];
+    }
+
+    addBoss(name, surname, age, phone, email, rate, salary, post) {
+        return this.employees.push(new Boss(name, surname, age, phone, email, rate, salary, post));
+    }
+
+    addManager(name, surname, age, phone, email, rate, salary, post, department) {
+        return this.employees.push(new Manager(name, surname, age, phone, email, rate, salary, post, department));
+    }
+
+    addSecurity(name, surname, age, phone, email, rate, salary, post) {
+        return this.employees.push(new Security(name, surname, age, phone, email, rate, salary, post));
+    }
+
+    addProgrammer(name, surname, age, phone, email, rate, salary, post) {
+        return this.employees.push(new Programmer(name, surname, age, phone, email, rate, salary, post));
+    }
+
+    getBosses() {
+        return this.employees.filter(boss => boss.isBoss);
+    }
+
+    getEmployees(search) {
+        const pattern = new RegExp(search, "i");
+        return this.employees.filter(foundItem => pattern.test(foundItem.name) || pattern.test(foundItem.surname) ||
+            pattern.test(foundItem.email) || pattern.test(foundItem.phone) || pattern.test(foundItem.salary));
+    }
+
+    getEmployee(name) {
+        return this.employees.filter(item => item.name === name)
+    }
+
+    getEmployeeById(id) {
+        return this.employees.find(item => item.id === id);
+    }
+
+    removeEmployee(id) {
+        return this.employees = this.employees.find(item => item.id !== id);
+    }
+
+    getAvgAgeEmployees() {
+        return (this.employees.reduce((acc, currItem) => acc + currItem.age, 0) / this.employees.length).toFixed(2);
+    }
+
+    getAvgSalaryEmployees() {
+        return (this.employees.reduce((acc, currItem) => acc + currItem.salary, 0) / this.employees.length).toFixed(2);
+    }
+
+    updateEmployeeById(id, newData) {
+        return Object.assign(this.getEmployeeById(id), newData);
+    }
+
+    getSubordinates(id) {
+        return this.employees.filter(item => item.isBoss && item.id === id);
     }
 
     toJSON() {
@@ -35,27 +82,29 @@ class Company {
         })
     }
 
-    toObject() {
+    toObject(id) {
+        const structureCompany = {};
         return {
             ...this
         }
     }
+
 }
 
 let uniqueId = 1;
 
-class CoWorker {
-    constructor(name, surname, age, phone, email, rate, post) {
+class Employee {
+    constructor(name, surname, age, phone, email, rate, salary, post) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.phone = phone;
         this.email = email;
         this.rate = rate;
+        this.salary = salary;
         this.post = post;
         this.id = uniqueId++;
     }
-
 
     toJSON() {
         return JSON.stringify({
@@ -65,34 +114,48 @@ class CoWorker {
 
 }
 
-class Manager extends CoWorker {
-    constructor(name, surname, age, phone, email, rate, post, department) {
-        super(name, surname, age, phone, email, rate, post)
+class Manager extends Employee {
+    constructor(name, surname, age, phone, email, rate, salary, post, department) {
+        super(name, surname, age, phone, email, rate, salary, post)
         this.department = department;
     }
 }
 
-class Boss extends CoWorker {
-    constructor(name, surname, age, phone, email, rate, post) {
-        super(name, surname, age, phone, email, rate, post);
+class Boss extends Employee {
+    constructor(name, surname, age, phone, email, rate, salary, post) {
+        super(name, surname, age, phone, email, rate, salary, post);
         this.isBoss = true;
     }
 }
 
-class Security extends CoWorker {
-    constructor(name, surname, age, phone, email, rate, post) {
-        super(name, surname, age, phone, email, rate, post);
+class Security extends Employee {
+    constructor(name, surname, age, phone, email, rate, salary, post) {
+        super(name, surname, age, phone, email, rate, salary, post);
     }
 }
 
-class Programmer extends CoWorker {
-    constructor(name, surname, age, phone, email, rate, post) {
-        super(name, surname, age, phone, email, rate, post);
+class Programmer extends Employee {
+    constructor(name, surname, age, phone, email, rate, salary, post) {
+        super(name, surname, age, phone, email, rate, salary, post);
     }
 }
 
-const com = new Company('fewf', 'fwef');
+const devIt = new Company('DevIT', 'ул.Северное шоссе № 4');
+devIt.addBoss('Taras', 'Prokofiev', 30, '23r232', 'test3@mail.com', '$',
+    1e4, 'Senior');
+devIt.addBoss('Vyacheslav', 'Badayev', 30, '2424224', 'test@gmail.com', '$',
+    104, 'Team Lead');
+devIt.addManager('Anna', 'Valman', 27, '32424', 'test2@gmail.com', '$',
+    1e4, 'PM', 'Sales');
+devIt.addProgrammer('Umar', 'Khalilov', 27, '23423242', 'ERMASTER100@gmail.com',
+    '$', 500, 'JS developer');
+devIt.addSecurity('Vlad', 'Antipenko', 25, '4242424', 'test3@gmail.com', '$',
+    500, 'Security');
 
-console.log(com.toObject())
+console.log(devIt.getEmployee('Taras'));
+console.log(devIt.getEmployees(500));
+// console.log(devIt.updateEmployeeById(1, {name: 'lego'}))
 
-console.log(com.manager2)
+console.log(devIt.getSubordinates(1))
+console.log(devIt.toObject());
+
