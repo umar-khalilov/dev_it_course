@@ -3,7 +3,6 @@
 const protectEmail = (email, replacer) => email.replace(/w\/[^.com$]/gi, replacer);
 console.log(protectEmail("robin_singh@example.com", "#"));
 console.log(protectEmail("test@gmail.com", '#'));
-
 //2
 function swapCase(str, shuffle = false) {
     let changedStr = '';
@@ -23,7 +22,6 @@ function swapCase(str, shuffle = false) {
     }
     return result;
 }
-
 console.log(swapCase('AaBbc', true));
 //3
 const textTruncate = (str, length = 100, ending = '...') => {
@@ -37,26 +35,15 @@ console.log(textTruncate('Lorem ipsum dolor sit amet, consectetur adipiscing eli
 console.log(textTruncate('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 15, '!!'));
 //4
 const chunkStr = (str, size = 1, trim = true) => trim ? str.trim()
-        .match(new RegExp('.{1,' + size + '}', 'g')) :
+    .match(new RegExp('.{1,' + size + '}', 'g')) :
     str.match(new RegExp('.{1,' + size + '}', 'g'));
 console.log(chunkStr('consectetur    ', 3));
-
 //5
 function romanToInt(str) {
     if (typeof str !== 'string') {
         return null;
     }
-    let Roman;
-    (function (Roman) {
-        Roman[Roman["I"] = 1] = "I";
-        Roman[Roman["V"] = 5] = "V";
-        Roman[Roman["X"] = 10] = "X";
-        Roman[Roman["L"] = 50] = "L";
-        Roman[Roman["C"] = 100] = "C";
-        Roman[Roman["D"] = 500] = "D";
-        Roman[Roman["M"] = 1000] = "M";
-    })(Roman || (Roman = {}));
-    const values = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000};
+    const values = { 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000 };
     const digits = Object.keys(values);
     let res = 0;
     [...str.toUpperCase()].forEach((char) => {
@@ -67,7 +54,6 @@ function romanToInt(str) {
     });
     return res;
 }
-
 function intToRoman(int) {
     if (isNaN(int) || int === 0) {
         return null;
@@ -82,6 +68,5 @@ function intToRoman(int) {
     }
     return numeral;
 }
-
 console.log(romanToInt('XXVI')); // 26
-console.log(intToRoman(26)); // 'XXVI'
+// console.log(intToRoman(26)); // 'XXVI'

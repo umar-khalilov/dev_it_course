@@ -47,26 +47,24 @@ console.log(chunkStr('consectetur    ', 3));
 
 //5
 
-/*function romanToInt(str: string): number {
+function romanToInt(str: string): number {
     if (typeof str !== 'string') {
         return null;
     }
 
-    enum Roman {
-        I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000
-    }
-
-    const values: object = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000};
+    type roman = 'I' | 'V' | 'X' | 'L' | 'C' | 'D' | 'M';
+    const values: { [key in roman]: number } = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000};
     const digits: string[] = Object.keys(values);
-    let res = 0;
-    [...str.toUpperCase()].forEach((char: string) => {
-        if (digits.indexOf(char) < digits.indexOf(char + 1)) {
+    let res:number = 0;
+    [...str.toUpperCase()].forEach((char:roman) => {
+
+        if (digits.indexOf(char) < digits.indexOf(char +1) ) {
             res -= values[char];
         }
         res += values[char];
     })
     return res;
-}*/
+}
 
 function intToRoman(int: number): string {
     if (isNaN(int) || int === 0) {
@@ -84,5 +82,5 @@ function intToRoman(int: number): string {
     return numeral;
 }
 
-// console.log(romanToInt('XXVI')); // 26
-console.log(intToRoman(26)); // 'XXVI'
+console.log(romanToInt('XXVI')); // 26
+// console.log(intToRoman(26)); // 'XXVI'
