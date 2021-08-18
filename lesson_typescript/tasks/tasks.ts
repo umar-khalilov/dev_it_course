@@ -57,7 +57,6 @@ function romanToInt(str: string): number {
     const digits: string[] = Object.keys(values);
     let res:number = 0;
     [...str.toUpperCase()].forEach((char:roman) => {
-
         if (digits.indexOf(char) < digits.indexOf(char +1) ) {
             res -= values[char];
         }
