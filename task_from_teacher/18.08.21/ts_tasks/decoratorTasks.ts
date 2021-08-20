@@ -22,20 +22,8 @@ function enumarable(value: boolean) {
 // 2. Перезаписать констуктор класса
 function classDecorator<T extends { new(...args: any[]): {} }>(targetConstructor: T) {
     return class extends targetConstructor {
-        name: string;
-        age: number;
+        age: number = 50;
 
-        constructor(name, age, ...args) {
-            super(...args)
-            console.log('creating new instance');
-            this.name = name;
-            this.age = 40;
-        }
-
-        @enumarable(true)
-        print(): string {
-            return `${this.name}, ${this.age} ${this.age * 2}`;
-        }
     }
 }
 
@@ -46,7 +34,7 @@ class User {
     constructor(name: string) {
         this.name = name;
     }
-
+    @enumarable(true)
     print(): string {
         return this.name;
     }

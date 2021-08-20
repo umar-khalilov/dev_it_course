@@ -4,14 +4,15 @@ interface MyLength {
     length: number;
 }
 
-function getLength<T extends MyLength>(arr: T): string {
+function getLength<T extends number | string>(arr: T[]): string {
     return `In argument ${arr} the length of the transmitted data is  ${arr.length}`;
 }
 
 const arr = [2, 4, 3, 2, 1];
+const strArr = ['fgdf','erge']
 const str: string = 'lrlalwe';
 console.log(getLength(arr))
-console.log(getLength(str))
+console.log(getLength(strArr))
 
 
 /*2. Функция принимает обьект и ключ, возвращает значение ключа.
