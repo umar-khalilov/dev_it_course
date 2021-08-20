@@ -21,9 +21,9 @@ const timer = setInterval((): void => {
 }, 1000)
 
 // 2. С помощью функции-генератора создайте итератор, каждый вызов которого будет возвращать следующее число Фибоначчи.
-const array = [0, 1];
 
-function* getFib(array: number[]) {
+function* getFib() {
+    const array = [0, 1];
     let temp: number = 0;
     for (let i = 0; i < array.length; i++) {
         temp = array[i] + array[i + 1];
@@ -33,7 +33,7 @@ function* getFib(array: number[]) {
 }
 
 
-let next = getFib(array);
+let next = getFib();
 
 console.log(next.next().value);
 console.log(next.next().value);
@@ -113,7 +113,7 @@ console.log(isSecondSetSubsetFirst(a, b))
 
 /*Задачи по объектам:
  7. Написать функцию, которая принимает объект и возвращает массив вида [[key, value], [key, value]]*/
-function getArrKeyVal(object: { name: string; has: boolean }): object[] {
+function getArrKeyVal(object: { name: string; has: boolean }): [string, any][] {
     return Object.entries(object);
 }
 
@@ -126,7 +126,7 @@ console.log(getArrKeyVal(obj));
 
 /*8. Написать функцию, которая "размораживает" замороженный объект (принимает замороженный объект, возвращает новый,
     содержащий свойства замороженного)*/
-function getDefrostObject(frozenObj: Readonly<{ name: string; has: boolean; }>): object {
+function getDefrostObject<T extends object>(frozenObj: T): T {
     return Object.assign({}, frozenObj);
 }
 
@@ -135,7 +135,7 @@ console.log(getDefrostObject(Object.freeze(obj)));
 /*9. Написать функцию, которая принимает массив объектов и возвращает новый объект, содержащий все свойства переданных
 объектов. Синтаксис: arrToObj(arr: object[]): object
 Пример: console.log(arrToObj([{a: 1}, {b: 2, c: 3}]));*/ //{a: 1, b: 2, c: 3}
-function arrToObject(arrOfObj: ({ a: number; b?: undefined; c?: undefined; } | { b: number; c: number; a?: undefined; })[]): object {
+function arrToObject(arrOfObj: Array<object>): object {
     return Object.assign({}, ...arrOfObj)
 }
 

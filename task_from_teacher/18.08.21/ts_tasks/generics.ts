@@ -9,7 +9,7 @@ function getLength<T extends number | string>(arr: T[]): string {
 }
 
 const arr = [2, 4, 3, 2, 1];
-const strArr = ['fgdf','erge']
+const strArr = ['fgdf', 'erge']
 const str: string = 'lrlalwe';
 console.log(getLength(arr))
 console.log(getLength(strArr))
@@ -17,10 +17,7 @@ console.log(getLength(strArr))
 
 /*2. Функция принимает обьект и ключ, возвращает значение ключа.
     Синтаксис: getValue(obj: T, key: R)*/
-function getValue<T extends object, R extends keyof T>(obj: T, key: R) {
-    if (!obj[key]) {
-        return false;
-    }
+function getValue<T extends object, R extends keyof T>(obj: T, key: R): T[R] {
     return obj[key];
 }
 
