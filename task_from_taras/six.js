@@ -11,27 +11,22 @@ function A(matrix) {
         return null;
     }
 
-    this.get = location => {
-        for (let i = location[0]; ;) {
-            if (this.matrix[i][location[1]]) {
-                return this.matrix[i][location[1]];
-            }
-            return null;
-        }
+    this.get = location => this.matrix[location[0]][location[1]] ? this.matrix[location[0]][location[1]] : false;
+
+
+    this.zip = () => {
     }
 
-    this.zip = function () {
-    }
+    this.unzip = (twoDimArr) => {
 
-    this.unzip = function () {
     }
 }
 
-const arr = [[0, 5, 2],
+const arr = [[0, 1, 2],
     [3, 4, 5]];
 
 const instance = new A(arr);
 
-console.log(instance.find(5));
+console.log(instance.find(1));
 
-console.log(instance.get([1, 2]))
+console.log(instance.get([0, 3]))
