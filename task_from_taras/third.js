@@ -1,14 +1,15 @@
 function a() {
-    console.log(b.ctxC);
-    return function b() {
-        console.log(c.ctxB)
-        return function c() {
-            return {
-                ctxC: {name: 'c'},
-                ctxB: {name: 'b'}
-            }
-        }
+    const cnt = {
+        ctxB: {name: 'b'},
+        ctxC: {name: 'c'}
     }
+    console.log(cnt)
+    return function () {
+        console.log({name: 'b', ctx: this})
+        return function () {
+            console.log({name: 'c', ctx: this})
+        }.bind(this)
+    }.bind(cnt)
 }
 
-a()()()
+a()()();

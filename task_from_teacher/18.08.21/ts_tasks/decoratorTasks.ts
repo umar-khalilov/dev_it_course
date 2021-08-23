@@ -11,7 +11,6 @@ interface PropertyDescriptor {
 }
 
 function enumarable(value: boolean) {
-
     return function log(target: Object, propName: string | Symbol, descriptor: PropertyDescriptor): void {
         descriptor.writable = true;
         descriptor.enumerable = value;

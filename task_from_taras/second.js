@@ -1,18 +1,15 @@
-function A(x = null) {
-    this.x = x;
-    Object.defineProperty(this,'x',{
-        get: function get(x){
-
-        },
-        set: function (){
-            return this.get()
+function Single() {
+    let ins = null;
+    return (() => {
+        if (!ins) {
+            ins = this
         }
-
-    })
+        return ins;
+    })();
 }
 
-let a = new A();
-let b = new A();
+const a = new Single();
+const b = new Single();
 
 a.x = 10;
 console.log(a.x)
