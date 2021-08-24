@@ -2,10 +2,19 @@
 
 /*1. Написать метод защиты email (например для не залогиненых пользователей)
 Синтаксис: protect_email(email: string, replacer: string = '*' ): string*/
-const protectEmail = (email, replacer) => email.replaceAll(/[b*\b]+[^.com$]/gi, replacer);
+const protectEmail = (email, replacer) => {
+    let protectedEmail = '';
+    for (let i = 1; i < email.length; i++) {
+        if (email[i] === '@' || email[i] === '.com') {
+            protectedEmail += email[i];
+        }
+        protectedEmail += replacer
+    }
+    return protectedEmail;
+}
 
 console.log(protectEmail("robin_singh@example.com", "#"));
-console.log(protectEmail("test@gmail.com",'#'))
+console.log(protectEmail("test@gmail.com", '#'))
 
 /*2. Написать метод который переводит символы в строке с нижнего регистра в верхний (c верхнего в нижний) +
     может перемешивать строку.
@@ -92,7 +101,6 @@ function intToRoman(int) {
 
 console.log(romanToInt('XXVI')); // 26
 console.log(intToRoman(26)); // 'XXVI'
-
 
 
 /*7. Метод "подбора карточных паролей" этот метод принимает набор символов из 4 цифр из которых теоретически может состоять пароль.

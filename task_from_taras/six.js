@@ -29,4 +29,4 @@ const instance = new A(arr);
 
 console.log(instance.find(1));
 
-console.log(instance.get([0, 3]))
+console.log(instance.get([1, 2]))
