@@ -5,7 +5,6 @@ class FastFoodNetwork {
     constructor(nameOfNetwork: string, restaurant: FastFoodRestaurant) {
         this.nameOfNetwork = nameOfNetwork;
         this.restaurant.push(restaurant);
-
     }
 
     addRestaurant(restaurant: FastFoodRestaurant): number {
@@ -13,7 +12,7 @@ class FastFoodNetwork {
     }
 
     removeRestaurant(id) {
-        return this.restaurant = this.restaurant.find(item => item.id !== id);
+        return this.restaurant = this.restaurant.filter(item => item.id !== id);
     }
 }
 
