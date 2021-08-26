@@ -2,36 +2,99 @@ const EventEmitter = require('events').EventEmitter; // Берем соотве�
 
 const server = new EventEmitter(); // создаем объект с его свойствами-методами
 
+// emitter.on(eventName, listener)
+// eventName <String> | <Symbol>
+// listener <Function>
+// emitter.addListener(eventName, listener) Alias
 server.on('request', request => request.approved = true); // Подписка
 
 server.on('request', request => console.log(request));
 
-// server.once('request', request => console.log(request));
-// server.prependListener('request', request => console.log(request));
-
-server.emit('request', {from: 'Client'});
+// emitter.emit(eventName[, arg1][, arg2][, ...])
+// синхронно вызывает каждого из обработчиков, зарегистрированных на событие под названием eventName,
+// в том порядке, они были зарегистрированы, передавая аргументы каждому из них.
+// Выдает true (верно), если у события были обработчики, в ином случае false (ложь).
+/*server.emit('request', {from: 'Client'});
 
 server.emit('request', {from: 'Another client'});
 
-// server.listenerCount('request');
+let counter = 0;
+server.on('counter', () => console.log(++counter));
 
-// server.setMaxListeners()
+server.emit('counter');
+
+server.emit('counter');*/
+
+// emitter.once(eventName, listener)
+// eventName <String> | <Symbol>
+// listener <Function>
+// Добавляет функцию обработчика единоразово для события с именем eventName.
+// В следующий раз когда eventName срабатывает, этот обработчик удаляется, а затем вызывается.
+/*server.once('once', data => console.log(data));
+server.emit('once', {id: 30, name: 'Tom'});
+server.emit('once', {id: 30, name: 'Tom'});*/
+
+// emitter.prependListener(eventName, listener)
+// Добавляет функцию listener (обработчика) к началу массива обработчиков события для события с именем eventName.
+// Не делается никаких проверок, чтобы увидеть добавлен ли уже listener.
+// Несколько вызовов передающих ту же комбинацию eventName и listener приведут к тому, что listener будет
+// добавлен и вызван множество раз.
+/*server.on('prepend', data => console.log(data, '1'))
+server.on('prepend', data => console.log(data, '2'))
+server.prependListener('prepend', data => console.log(data));
+
+server.emit('prepend', {id: 3, name: 'prepend'})*/
+
+// emitter.prependOnceListener(eventName, listener)
+// Добавляет функцию обработчика единожды для события с именем eventName в начало массива обработчиков.
+// В следующий раз когда eventName срабатывает, этот обработчик удаляется, а затем вызывается.
+// server.prependOnceListener('prepend', (stream) => {
+//     console.log('Ah, we have our first user!');
+// });
+
+// emitter.listenerCount(eventName), eventName <String> | <Symbol>
+// Показывает количество обработчиков событий, которые обрабатывают событие под названием eventName.
+// console.log(server.listenerCount('request'));
+// console.log(EventEmitter.listenerCount(server, 'request')) // deprecated
+
+
+// emitter.setMaxListeners(n)
+// По умолчанию EventEmitters будет выдавать предупреждение, если добавляются более 10 слушателей для конкретного события.
+// Это полезное значение по умолчанию, которое помогает находить утечки памяти. Очевидно, что не все события должны
+// быть ограничены только 10 обработчиками. Метод emitter.setMaxListeners() позволяет изменить ограничение для конкретного
+// экземпляра EventEmitter. Значение может быть установлено до Infinity (бесконечности) (или 0), чтобы указать,
+// неограниченное количество обработчиков. Возвращает ссылку на EventEmitter, так что вызовы могут быть выстроены в цепочку.
+// server.setMaxListeners(5);
+
+// Показывает текущее значение максимального количества обработчиков для EventEmitter ,которое либо задается с помощью
+// emitter.setMaxListeners(n) либо устанавливается по умолчанию с помощью EventEmitter.defaultMaxListeners.
 // server.getMaxListeners()
 
-// server.eventNames();
-// server.listeners('request')
+// Показывает массив со списком событий, на которые генератор событий зарегистрировал обработчиков.
+// Значения в массиве будут строками или символами.
+// console.log(server.eventNames());
 
-// server.removeListener('request',(data)=>console.log(data))
-// server.removeAllListeners('request')
+// emitter.listeners(eventName)
+// Возвращает копию массива обработчиков для события с названием eventName.
+// console.log(server.listeners('request'));
+
+// emitter.removeListener(eventName, listener)
+// Удаляет указанный обработчик из массива обработчиков для события с названием eventName.
+// emitter.off(eventName, listener) Alias
+
+// const callback = (stream) => console.log('someone connected!');
+// server.on('connection', callback);
+
+// console.log(server.removeListener('connection', callback));
+
+// emitter.removeAllListeners([eventName])
+// Удаляет всех, или конкретных обработчиков из указанного eventName. Обратите внимание, что неправильно удалять
+// обработчиков где-либо, в коде особенно, когда экземпляр класса EventEmitter был создан каким-либо другим компонентом
+// или модулем (например, сокеты или файловые потоки).
+// Возвращает ссылку на EventEmitter и таким образом вызовы могут быть выстроены в цепочку
+// console.log(server.removeAllListeners('request'));
+
 //==========================================================================================
-
-/*console.log(server.listeners('request')) // все обработчики
-
-console.log(EventEmitter.listenerCount(server, 'request')) // deprecated
-
-console.log(server.listenerCount('request')) // кол-во обработчиков*/
-
-//===========================================================================================
 
 // server.emit('error'); // throw TypeError
 // server.emit('error',new Error()); // throw err
