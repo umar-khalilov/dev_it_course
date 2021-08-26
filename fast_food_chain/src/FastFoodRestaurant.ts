@@ -24,11 +24,11 @@ class FastFoodRestaurant {
     }
 
     removeEmployee(id: number) {
-        this.employees = this.employees.find(item => item.id !== id)
+        this.employees = this.employees.filter(item => item.id !== id)
     }
 
     removeMenu(id: number) {
-        this.menu = this.menu.find(item => item.id !== id)
+        this.menu = this.menu.filter(item => item.id !== id)
     }
 
     getEmployees() {
