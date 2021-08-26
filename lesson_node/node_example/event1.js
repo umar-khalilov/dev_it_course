@@ -6,10 +6,23 @@ server.on('request', request => request.approved = true); // Подписка
 
 server.on('request', request => console.log(request));
 
+// server.once('request', request => console.log(request));
+// server.prependListener('request', request => console.log(request));
+
 server.emit('request', {from: 'Client'});
 
 server.emit('request', {from: 'Another client'});
 
+// server.listenerCount('request');
+
+// server.setMaxListeners()
+// server.getMaxListeners()
+
+// server.eventNames();
+// server.listeners('request')
+
+// server.removeListener('request',(data)=>console.log(data))
+// server.removeAllListeners('request')
 //==========================================================================================
 
 /*console.log(server.listeners('request')) // все обработчики
@@ -63,9 +76,10 @@ setInterval(() => {
 
 //=====================================================================================================
 
-const db = new EventEmitter(); // объект источника данных
+// const db = new EventEmitter(); // объект источника данных
 // Который может посылать какую-то информацию, которую Request в свою очередь может пересылать клиенту
 
+/*
 function Request() {
     const self = this;
     this.bigData = new Array(1e6).join('*');
@@ -80,4 +94,4 @@ setInterval(() => {
     request.end();
     console.log(process.memoryUsage().heapUsed); // выводится текущее поедание памяти
     console.log(db);
-}, 200);
+}, 200);*/
