@@ -1,0 +1,5 @@
+Архитектура: x64! 
+    Версия: #91-Ubuntu SMP Thu Jul 15 19:09:17 UTC 2021! 
+    Общий ОЗУ системы: 4010176512 
+    CPU: [{"model":"Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz","speed":1490,"times":{"user":688120,"nice":1560,"sys":103700,"idle":4790150,"irq":0}},{"model":"Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz","speed":1706,"times":{"user":663000,"nice":1400,"sys":97240,"idle":4822830,"irq":0}},{"model":"Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz","speed":1697,"times":{"user":684580,"nice":1350,"sys":109110,"idle":4785700,"irq":0}},{"model":"Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz","speed":1433,"times":{"user":648620,"nice":1660,"sys":96110,"idle":4823530,"irq":0}}]!
+    Инфа о юзере: {"uid":1000,"gid":1000,"username":"umar","homedir":"/home/umar","shell":"/bin/bash"}
