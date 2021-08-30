@@ -1,10 +1,10 @@
-import Menu from "./Menu";
-import MenuItem from "./MenuItem";
-import Employee from "./Employee";
-import { generateId } from "./Employee";
+import Menu from "./Menu.js";
+import MenuItem from "./MenuItem.js";
+import Employee from "./Employee.js";
+import { generateId } from "./Employee.js";
 export default class FastFoodRestaurant {
-    menu;
-    employees;
+    menu = [];
+    employees = [];
     address;
     name;
     id;

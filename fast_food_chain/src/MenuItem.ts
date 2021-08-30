@@ -1,11 +1,11 @@
-import Supplement from "./Supplement";
+import Supplement from "./Supplement.js";
 
 export default class MenuItem {
     nameMenu: string;
     weight: number;
     costs: number;
     calories: number;
-    permissibleAdditives: Array<Supplement>;
+    permissibleAdditives: Array<Supplement> = [];
     description: string;
 
     constructor(nameMenu: string, weight: number, costs: number, calories: number, permissibleAdditives: Supplement, description: string) {

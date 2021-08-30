@@ -3,7 +3,7 @@ export default class MenuItem {
     weight;
     costs;
     calories;
-    permissibleAdditives;
+    permissibleAdditives = [];
     description;
     constructor(nameMenu, weight, costs, calories, permissibleAdditives, description) {
         this.nameMenu = nameMenu;

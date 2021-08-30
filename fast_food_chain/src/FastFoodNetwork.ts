@@ -1,7 +1,7 @@
-import FastFoodRestaurant from "./FastFoodRestaurant";
+import FastFoodRestaurant from "./FastFoodRestaurant.js";
 
 export default class FastFoodNetwork {
-    public restaurant: Array<FastFoodRestaurant>;
+    public restaurant: Array<FastFoodRestaurant> = [];
     nameOfNetwork: string;
     bigBoss: string;
 

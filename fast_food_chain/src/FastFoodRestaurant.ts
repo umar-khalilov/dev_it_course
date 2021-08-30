@@ -1,12 +1,12 @@
-import Menu from "./Menu";
-import Supplement from "./Supplement";
-import MenuItem from "./MenuItem";
-import Employee from "./Employee"
-import {generateId} from "./Employee";
+import Menu from "./Menu.js";
+import Supplement from "./Supplement.js";
+import MenuItem from "./MenuItem.js";
+import Employee from "./Employee.js"
+import {generateId} from "./Employee.js";
 
 export default class FastFoodRestaurant {
-    public menu: Array<Menu>;
-    public employees: Array<Employee>;
+    public menu: Array<Menu> =[];
+    public employees: Array<Employee> = [];
     address: string;
     name: string;
     id: number;

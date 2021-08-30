@@ -1,5 +1,5 @@
 export default class FastFoodNetwork {
-    restaurant;
+    restaurant = [];
     nameOfNetwork;
     bigBoss;
     constructor(nameOfNetwork, bigBoss, restaurant) {

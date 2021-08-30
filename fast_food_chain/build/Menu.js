@@ -1,6 +1,6 @@
-import { generateId } from "./Employee";
+import { generateId } from "./Employee.js";
 export default class Menu {
-    menuItem;
+    menuItem = [];
     id;
     constructor(menuItem) {
         this.menuItem.push(menuItem);

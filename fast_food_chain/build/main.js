@@ -1,10 +1,9 @@
-import MenuItem from "./MenuItem";
-import Supplement from "./Supplement";
-import Menu from "./Menu";
-import Employee from "./Employee";
-import FastFoodRestaurant from "./FastFoodRestaurant";
-import FastFoodNetwork from "./FastFoodNetwork";
-
+import MenuItem from "./MenuItem.js";
+import Supplement from "./Supplement.js";
+import Menu from "./Menu.js";
+import Employee from "./Employee.js";
+import FastFoodRestaurant from "./FastFoodRestaurant.js";
+import FastFoodNetwork from "./FastFoodNetwork.js";
 const menuItem = new MenuItem('test', 20, 30, 22, new Supplement('salad', 30, 30), 'lala');
 const menu = new Menu(menuItem);
 const employee = new Employee('test', 'test', 40, 42023, 42042, '$', 'cook', '2 years');
