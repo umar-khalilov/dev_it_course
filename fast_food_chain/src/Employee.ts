@@ -1,4 +1,4 @@
-class Employee {
+export default class Employee {
     name: string;
     surname: string;
     age: number;
@@ -9,7 +9,8 @@ class Employee {
     experience: string;
     id: number;
 
-    constructor(name: string, surname: string, age: number, phone: number, salary: number, rate: string, post: string, experience: string) {
+    constructor(name: string, surname: string, age: number, phone: number, salary: number, rate: string, post: string,
+                experience: string) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -18,9 +19,14 @@ class Employee {
         this.rate = rate;
         this.post = post;
         this.experience = experience;
-        this.id = uniqueId++;
+        this.id = generateId().genId();
     }
 
 }
 
-let uniqueId = 0;
+export const generateId = () => {
+    let id: number = 0;
+    return {
+        genId: (): number => ++id
+    };
+};

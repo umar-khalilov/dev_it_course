@@ -1,9 +1,13 @@
-class FastFoodNetwork {
+import FastFoodRestaurant from "./FastFoodRestaurant";
+
+export default class FastFoodNetwork {
     public restaurant: Array<FastFoodRestaurant>;
     nameOfNetwork: string;
+    bigBoss: string;
 
-    constructor(nameOfNetwork: string, restaurant: FastFoodRestaurant) {
+    constructor(nameOfNetwork: string, bigBoss: string, restaurant: FastFoodRestaurant) {
         this.nameOfNetwork = nameOfNetwork;
+        this.bigBoss = bigBoss;
         this.restaurant.push(restaurant);
     }
 
@@ -11,7 +15,7 @@ class FastFoodNetwork {
         return this.restaurant.push(restaurant);
     }
 
-    removeRestaurant(id) {
+    removeRestaurant(id: number) {
         return this.restaurant = this.restaurant.filter(item => item.id !== id);
     }
 }

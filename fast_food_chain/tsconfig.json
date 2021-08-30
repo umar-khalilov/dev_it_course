@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "ESNext",
     "outDir": "build",
-    "outFile": "./build/bundle.js",
+    //    "outFile": "./build/fastFoodApp.js",
     "pretty": true,
     "alwaysStrict": true,
-    "removeComments": true
+    "removeComments": true,
+    "sourceMap": true,
+    "module": "ESNext"
   }
 }

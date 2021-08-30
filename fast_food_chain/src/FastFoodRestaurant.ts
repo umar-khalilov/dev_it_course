@@ -1,4 +1,10 @@
-class FastFoodRestaurant {
+import Menu from "./Menu";
+import Supplement from "./Supplement";
+import MenuItem from "./MenuItem";
+import Employee from "./Employee"
+import {generateId} from "./Employee";
+
+export default class FastFoodRestaurant {
     public menu: Array<Menu>;
     public employees: Array<Employee>;
     address: string;
@@ -10,7 +16,7 @@ class FastFoodRestaurant {
         this.employees.push(Object.seal(employees))
         this.address = address;
         this.name = name;
-        this.id = uniqueId++;
+        this.id = generateId().genId();
     }
 
     addEmployee(name: string, surname: string, age: number, phone: number, salary: number, rate: string, post: string,
@@ -18,7 +24,7 @@ class FastFoodRestaurant {
         this.employees.push(Object.seal(new Employee(name, surname, age, phone, salary, rate, post, experience)));
     }
 
-    addMenu(name: string, weight: number, costs: number, calories: number, permissibleAdditives: string,
+    addMenu(name: string, weight: number, costs: number, calories: number, permissibleAdditives: Supplement,
             description: string) {
         this.menu.push(new Menu(new MenuItem(name, weight, costs, calories, permissibleAdditives, description)));
     }

@@ -1,17 +1,19 @@
-class MenuItem {
+import Supplement from "./Supplement";
+
+export default class MenuItem {
     nameMenu: string;
     weight: number;
     costs: number;
     calories: number;
-    permissibleAdditives: string;
+    permissibleAdditives: Array<Supplement>;
     description: string;
 
-    constructor(nameMenu: string, weight: number, costs: number, calories: number, permissibleAdditives: string, description: string) {
+    constructor(nameMenu: string, weight: number, costs: number, calories: number, permissibleAdditives: Supplement, description: string) {
         this.nameMenu = nameMenu;
         this.weight = weight;
         this.costs = costs;
         this.calories = calories;
-        this.permissibleAdditives = permissibleAdditives;
+        this.permissibleAdditives.push(permissibleAdditives);
         this.description = description;
     }
 
