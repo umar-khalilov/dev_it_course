@@ -1,12 +1,46 @@
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {
+}
+
+//Событие: 'newListener'
+// eventName <строка> | <symbol> Имя события, которое прослушивается
+// listener <Функция> Функция обработчика событий
+
+// EventEmitter Экземпляр будет выполнять свое собственное 'newListener' событие, прежде чем слушатель будет
+// добавлен в свой внутренний массив слушателей.
+// Слушателям, зарегистрированным для 'newListener' события, передается имя события и ссылка на добавляемого слушателя.
+// Тот факт, что событие вызвано прежде, чем добавлен слушатель имеет тонкий, но важный побочный эффект:
+// любые дополнительные слушатели зарегистрированные с тем же названием в пределах 'newListener' коллбек
+// вставляет перед тем слушателем, который находится в процессе добавления.
+const myEmitter = new MyEmitter();
+// Only do this once so we don't loop forever
+myEmitter.once('newListener', (event, listener) => {
+    if (event === 'event') {
+        // Insert a new listener in front
+        myEmitter.on('event', () => {
+            console.log('B');
+        });
+    }
+});
+myEmitter.on('event', () => {
+    console.log('A');
+});
+myEmitter.emit('event');
+// Prints:
+//   B
+//   A
 // EventTarget И Event объекты являются реализацией Node.js существующих в EventTargetWeb API
-const EventTarget = require('events')
+// const {EventTarget} = require('events')
 // Между Node.js EventTarget и EventTarget веб-API есть два ключевых различия :
 // 1)EventTarget экземпляры DOM могут быть иерархическими, в Node.js. нет концепции иерархии и распространения событий.
 // То есть событие, отправленное EventTarget объекту, не распространяется через иерархию вложенных целевых объектов,
 // каждый из которых может иметь свой собственный набор обработчиков для события.
 // 2) В Node.js EventTarget, если прослушиватель событий является асинхронной функцией или возвращает Promise,
-//     а возвращенные Promise отклонения, отклонение автоматически фиксируется и обрабатывается так же, как и
+//  а возвращенные Promise отклонения, автоматически фиксируется и обрабатывается так же, как и
 // прослушиватель, который генерируется синхронно.
+// const target = new EventTarget();
+
 function handler1(event) {
     console.log(event.type);  // Prints 'foo'
     event.a = 1;
@@ -29,10 +63,10 @@ const handler4 = {
     }
 };
 
-target.addEventListener('foo', handler1);
-target.addEventListener('foo', handler2);
-target.addEventListener('foo', handler3);
-target.addEventListener('foo', handler4, {once: true});
+// target.addEventListener('foo', handler1);
+// target.addEventListener('foo', handler2);
+// target.addEventListener('foo', handler3);
+// target.addEventListener('foo', handler4, {once: true});
 
 //Класс: Event
 // Event Объект является адаптацией EventWeb API. Экземпляры создаются внутри Node.js.

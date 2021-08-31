@@ -2,29 +2,49 @@ const path = require('path');
 const fs = require('fs');
 
 // 1. findFile(fileName, dirPath = '__dirname', cb: (err, path|null)=>{})
-function findFile(fileName, dirPath = '__dirname', cb) {
-    let files = fs.readdirSync(dirPath);
-    for (let i = 0; i < files.length; i++) {
-        fileName = path.join(dirPath, files[i]);
-        let stat = fs.lstatSync(fileName);
-        if (stat.isDirectory()) {
-            findFile(fileName, dirPath); //recurse
-        } else if (fileName.indexOf(dirPath) >= 0) {
-            console.log('-- found: ', fileName);
+const findFile = (fileName, dirPath = __dirname, cb) => {
+    fs.readdir(dirPath, (err, files) => {
+        if (err) {
+            throw new Error(err);
         }
-    }
-    return files.filter((item) => item === fileName)
+        for (let file of files) {
+            fs.stat(path.join(dirPath, file), (err, status) => {
+                if (err) {
+                    throw new Error(err);
+                }
+                const path_ = path.join(dirPath, file);
+                if (status.isDirectory()) {
+                    console.log(file);
+                    findFile(fileName, path_, cb);
+                }
+
+                if (status.isFile()) {
+                    console.log(file);
+                }
+                if (file === fileName) {
+                    return cb(err, path_);
+                }
+
+            });
+        }
+
+    });
 }
 
-console.log(findFile('arr.js', './', (err, pathName) => {
+findFile('arr.js', './', (err, data) => {
     if (err) {
-        throw new Error(err)
+        throw new Error(err);
     }
-    return pathName
-}))
+    console.log(data);
+});
 
 
 // 2. dirCopy(dirSource, dirTarget, cb:(err)=>{})
+function dirCopy(dirSource, dirTarget, cb) {
+    fs.cp(dirSource, dirTarget, {recursive: true}, cb);
+}
+
+dirCopy("files/", "files_copy/", (err) => err && throw new Error(err));
 
 // 3. convertCsvToJson(sourcePathCsv, outputPathNewJson, options: {delimiter: ';', encoding: 'utf8'}, cb:(err)=>{})
 
