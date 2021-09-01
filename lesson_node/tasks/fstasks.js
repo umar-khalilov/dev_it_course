@@ -31,12 +31,12 @@ const findFile = (fileName, dirPath = __dirname, cb) => {
     });
 }
 
-findFile('arr.js', './', (err, data) => {
-    if (err) {
-        throw new Error(err);
-    }
-    console.log(data);
-});
+// findFile('arr.js', './', (err, data) => {
+//     if (err) {
+//         throw new Error(err);
+//     }
+//     console.log(data);
+// });
 
 
 // 2. dirCopy(dirSource, dirTarget, cb:(err)=>{})
@@ -44,8 +44,31 @@ function dirCopy(dirSource, dirTarget, cb) {
     fs.cp(dirSource, dirTarget, {recursive: true}, cb);
 }
 
-dirCopy("files/", "files_copy/", (err) => err && throw new Error(err));
+// dirCopy("files/", "files_copy/", (err) => err && throw new Error(err));
 
 // 3. convertCsvToJson(sourcePathCsv, outputPathNewJson, options: {delimiter: ';', encoding: 'utf8'}, cb:(err)=>{})
 
 // 4. megaCalcPath(sourcePath, targetPath, length1, length2, action: '+' | '-', cb:(err, newFilePath)=>{})
+function megaCalcPath(sourcePath, targetPath, length1, length2, action = '+', cb) {
+    fs.readFile(sourcePath, {encoding: 'utf8', flag: 'r'}, (err, data) => {
+        if (err) {
+            throw new Error(err);
+        }
+        const digits = data.match(/[0-9]/g);
+        let string = '';
+        digits.forEach((item) => {
+            string += item;
+        })
+
+        fs.writeFile(targetPath, string, {encoding: 'utf8', flag: 'w'}, (err, data) => {
+            if (err) {
+                throw new Error(err);
+            }
+            console.log(data)
+
+        })
+    })
+
+}
+
+megaCalcPath('./wrote.txt', './digits.txt')

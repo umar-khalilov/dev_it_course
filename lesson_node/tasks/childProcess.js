@@ -4,10 +4,12 @@ const {spawn, fork} = require('child_process');
 function getHtmlChunk(url = '') {
     let countChunk = 0;
     spawn('curl', [url]).stdout.on('data', data => {
-            // data.toString()
-            console.log(`Quantity chunks: ${countChunk}`)
+            console.log(data.toString());
+            countChunk++;
         }
-    );
+    ).on('close', () => {
+        console.log(`Quantity chunks: ${countChunk}`)
+    })
 
 
 }
@@ -26,4 +28,4 @@ function expireMessageFromParent(target = '', message = '') {
     }).send(message)
 }
 
-expireMessageFromParent('./childTest.js', '42jk&43j?djASP-00034u*%K:lj2@#)(*');
+// expireMessageFromParent('./childTest.js', '42jk&43j?djASP-00034u*%K:lj2@#)(*');

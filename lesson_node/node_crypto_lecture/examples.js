@@ -9,7 +9,7 @@ function encryptText(text) {
     return encrypted;
 }
 
-console.log(encryptText("javascript"));
+// console.log(encryptText("javascript"));
 
 function decryptText(text) {
     const decipher = crypto.createDecipher(algorithm, password);
@@ -19,7 +19,7 @@ function decryptText(text) {
 }
 
 let encrypted = encryptText("javascript");
-console.log(decryptText(encrypted));
+// console.log(decryptText(encrypted));
 
 
 // const secret = 'thisissecret';
@@ -33,3 +33,11 @@ console.log(decryptText(encrypted));
 // }
 //
 // console.log(getHash('javascript'));
+const mac =  require("crypto").createHmac("sha256", "password").update("If you love node so much why don't you marry it?")
+    .digest("hex");
+console.log(mac,1)
+const hash = require("crypto")
+    .createHash("sha256")
+    .update("Man oh man do I love node!")
+    .digest("hex");
+console.log(hash)
