@@ -2,13 +2,14 @@ const {spawn, fork} = require('child_process');
 // 1. В отдельном процессе (на ваш выбор), вывести эту страницу(html код):
 // https:  в консоль, в конце показать количество чанков.
 function getHtmlChunk(url = '') {
-    const child = spawn('curl', [url]);
     let countChunk = 0;
-    child.stdout.on('data', data => {
+    spawn('curl', [url]).stdout.on('data', data => {
             // data.toString()
             console.log(`Quantity chunks: ${countChunk}`)
         }
-    )
+    );
+
+
 }
 
 // getHtmlChunk('https://ru.wikipedia.org/wiki/' +
