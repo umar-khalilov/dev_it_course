@@ -15,14 +15,17 @@ const {
     createWriteStream,
 } = require('fs');
 
-const secret = 'Lalalend';
-const hash = createHmac('sha256', secret).update('I love cupcakes').digest('hex');
-console.log(hash);
 
 // Класс Certificate
 // SPKAC-механизм запроса на верификацию сертификата, изначально реализованный в Netscape, а сейчас являющийся
 // частью кейгена в HTML5.Модуль crypto дает классу Certificate работать с данными SPKAC. Чаще всего используется для
 // обработки выводов, сгенерированными элементом HTML5 <keygen>. Node.js использует реализацию OpenSSL SPKAC.
+// SPKAC представляет собой подписанный Netscape открытый ключ и вызов.
+// spkac - утилита печати и генерации SPKAC
+// SPKAC это акроним, обозначающий подписанный открытый ключ и запрос , также известный как NetscapeSPKI
+// Это формат для отправки запроса на подпись сертификата : он кодирует открытый ключ , которым можно управлять
+// с помощью openssl . Он создается с использованием немного задокументированного HTML-элемента keygen внутри ряда
+// Netscape-совместимых браузеров
 
 // Структура данных spkac включает в себя открытый ключ и челлендж. certificate.exportChallenge() возвращает
 // компонент челленджа в виде буфера Node.js. Аргумент spkac может быть либо строкой, либо буфером.
@@ -54,10 +57,11 @@ console.log(hash);
 // Наследуется от: <stream.Transform>
 // Экземпляры Cipher класса используются для шифрования данных. Класс можно использовать одним из двух способов:
 // Как поток, который доступен как для чтения, так и для записи, где простые незашифрованные данные записываются
-// для создания зашифрованных данных на читаемой стороне, или
+// для создания зашифрованных данных на читаемой стороне.
 // Использование cipher.update()и cipher.final()метод для получения зашифрованных данных.
 // crypto.createCipher()Или crypto.createCipheriv()методы используются для создания Cipher экземпляров.
 //     Cipher объекты не должны создаваться напрямую с использованием new ключевого слова.
+
 // const algorithm = 'aes-192-cbc';
 // const password = 'Password used to generate key';
 // scrypt(password, 'salt', 24, (err, key) => {
@@ -79,7 +83,7 @@ console.log(hash);
 //         cipher.end();
 //     });
 // });
-// // Использование Cipher потоковых и конвейерных потоков:
+// Использование Cipher потоковых и конвейерных потоков:
 // scrypt(password, 'salt', 24, (err, key) => {
 //     if (err) throw err;
 //     // Then, we'll generate a random initialization vector
@@ -369,23 +373,28 @@ console.log(hash);
 // crypto.createHmac()Метод используется для создания Hmac экземпляров. Hmac объекты не должны создаваться напрямую с
 // использованием new ключевого слова.
 // Пример: использование Hmac объектов как потоков:
-const hmac = createHmac('sha256', 'a secret');
 
-hmac.on('readable', () => {
-    // Only one element is going to be produced by the
-    // hash stream.
-    const data = hmac.read();
-    if (data) {
-        console.log(data.toString('hex'));
-        // Prints:
-        //   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
-    }
-});
+// const secret = 'Lalalend';
+// const hash = createHmac('sha256', secret).update('I love cupcakes').digest('hex');
+// console.log(hash);
 
-hmac.write('some data to hash');
-hmac.end();
+// const hmac = createHmac('sha256', 'a secret');
+//
+// hmac.on('readable', () => {
+// Only one element is going to be produced by the
+// hash stream.
+// const data = hmac.read();
+// if (data) {
+// console.log(data.toString('hex'));
+// Prints:
+//   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
+//     }
+// });
 
-// Пример: Использование Hmacпотоковых и конвейерных потоков:
+// hmac.write('some data to hash');
+// hmac.end();
+
+// Пример: Использование Hmac потоковых и конвейерных потоков:
 // const hmac = createHmac('sha256', 'a secret');
 //
 // const input = createReadStream('test.js');
@@ -427,16 +436,16 @@ hmac.end();
 // key <CryptoKey>
 // Возвращает: <KeyObject>
 // Пример: преобразование CryptoKey экземпляра в KeyObject:
-const {webcrypto, KeyObject} = require('crypto');
-const {subtle} = webcrypto;
-
-const key = await subtle.generateKey({
-    name: 'HMAC',
-    hash: 'SHA-256',
-    length: 256
-}, true, ['sign', 'verify']);
-const keyObject = KeyObject.from(key);
-console.log(keyObject.symmetricKeySize);
+// const {webcrypto, KeyObject} = require('crypto');
+// const {subtle} = webcrypto;
+//
+// const key = subtle.generateKey({
+//     name: 'HMAC',
+//     hash: 'SHA-256',
+//     length: 256
+// }, true, ['sign', 'verify']);
+// const keyObject = KeyObject.from(key);
+// console.log(keyObject.symmetricKeySize);
 
 // keyObject.asymmetricKeyDetails
 // <Объект>
@@ -497,10 +506,10 @@ console.log(keyObject.symmetricKeySize);
 // В качестве записываемого потока , в который записываются данные, которые должны быть подписаны, и sign.sign()
 // метод используется для генерации и возврата подписи, или
 // Использование sign.update()и sign.sign()методы для получения подписи.
-// crypto.createSign()Метод используется для создания Signэкземпляров. Аргумент - это строковое имя
-// используемой хеш-функции. Signобъекты не должны создаваться напрямую с использованием newключевого слова.
+// crypto.createSign()Метод используется для создания Sign экземпляров. Аргумент - это строковое имя
+// используемой хеш-функции. Sign объекты не должны создаваться напрямую с использованием new ключевого слова.
 
-// Пример: Использование Signи Verifyобъекты в виде потоков:
+// Пример: Использование Sign и Verify объекты в виде потоков:
 // const {
 //     generateKeyPairSync,
 //     createSign,
@@ -553,7 +562,7 @@ console.log(keyObject.symmetricKeySize);
 //     Возвращает: <Буфер> | <строка>
 
 // Вычисляет подпись для всех передаваемых данных с помощью sign.update()или sign.write().
-// Если privateKeyне a KeyObject, эта функция ведет себя так, как если бы privateKeyона была передана в
+// Если privateKey не a KeyObject, эта функция ведет себя так, как если бы privateKey она была передана в
 // crypto.createPrivateKey(). Если это объект, можно передать следующие дополнительные свойства:
 //
 //     dsaEncoding <string> Для DSA и ECDSA эта опция определяет формат сгенерированной подписи.
@@ -565,25 +574,25 @@ console.log(keyObject.symmetricKeySize);
 //
 //     crypto.constants.RSA_PKCS1_PADDING (дефолт)
 // crypto.constants.RSA_PKCS1_PSS_PADDING
-// RSA_PKCS1_PSS_PADDINGбудет использовать MGF1 с той же хэш-функцией, которая использовалась для подписи сообщения,
+// RSA_PKCS1_PSS_PADDING будет использовать MGF1 с той же хэш-функцией, которая использовалась для подписи сообщения,
 //     как указано в разделе 3.1 RFC 4055 , если только хеш-функция MGF1 не была указана как часть ключа в соответствии
 // с разделом 3.3 RFC 4055 .
 //
 //     saltLength <целое число> Длина соли при заполнении RSA_PKCS1_PSS_PADDING. Специальное значение
-// crypto.constants.RSA_PSS_SALTLEN_DIGESTустанавливает длину соли равной размеру дайджеста,
+// crypto.constants.RSA_PSS_SALTLEN_DIGEST устанавливает длину соли равной размеру дайджеста,
 //     crypto.constants.RSA_PSS_SALTLEN_MAX_SIGN(по умолчанию) устанавливает максимально допустимое значение.
 //
-//     Если outputEncodingпредоставляется, возвращается строка; в противном случае Buffer возвращается a .
+//     Если outputEncoding предоставляется, возвращается строка; в противном случае Buffer возвращается a .
 //
-//     После Signвызова sign.sign()метода объект не может быть снова использован . Несколько обращений к
+//     После Sign вызова sign.sign()метода объект не может быть снова использован . Несколько обращений к
 // sign.sign()вызовут выдачу ошибки.
 
 // sign.update(data[, inputEncoding])#
 // data <строка> | <Буфер> | <TypedArray> | <DataView>
-//     inputEncoding <строка> кодирования из dataстроки.
-// Обновляет Signконтент заданным data, кодировка которого указана в inputEncoding. Если encodingне указан,
-//     а dataявляется строкой, применяется кодировка 'utf8'. Если dataэто Buffer, TypedArrayили DataView, то
-// inputEncodingигнорируется.
+//     inputEncoding <строка> кодирования из data строки.
+// Обновляет Sign контент заданным data, кодировка которого указана в inputEncoding. Если encoding не указан,
+//     а data является строкой, применяется кодировка 'utf8'. Если data это Buffer, TypedArray или DataView, то
+// inputEncoding игнорируется.
 //
 //     Это можно вызывать много раз с новыми данными во время потоковой передачи.
 
@@ -595,16 +604,16 @@ console.log(keyObject.symmetricKeySize);
 //     В качестве записываемого потока, в котором записанные данные используются для проверки соответствия предоставленной
 //     подписи, или
 //     Использование verify.update()и verify.verify()методы для проверки подписи.
-//     crypto.createVerify()Метод используется для создания Verifyэкземпляров. Verifyобъекты не должны создаваться
-//     напрямую с использованием newключевого слова.
+//     crypto.createVerify()Метод используется для создания Verify экземпляров. Verify объекты не должны создаваться
+//     напрямую с использованием new ключевого слова.
 //
 //     verify.update(data[, inputEncoding])
 //     История
 //     data <строка> | <Буфер> | <TypedArray> | <DataView>
-//     inputEncoding <строка> кодирования из dataстроки.
-//     Обновляет Verifyконтент заданным data, кодировка которого указана в inputEncoding. Если inputEncodingне указан,
-//     а dataявляется строкой, применяется кодировка 'utf8'. Если dataэто Buffer, TypedArrayили DataView, то
-//     inputEncodingигнорируется.
+//     inputEncoding <строка> кодирования из data строки.
+//     Обновляет Verify контент заданным data, кодировка которого указана в inputEncoding. Если inputEncoding не указан,
+//     а data является строкой, применяется кодировка 'utf8'. Если data это Buffer, TypedArray или DataView, то
+//     inputEncoding игнорируется.
 //
 //     Это можно вызывать много раз с новыми данными во время потоковой передачи.
 //
@@ -615,28 +624,28 @@ console.log(keyObject.symmetricKeySize);
 //         padding <целое число>
 //         saltLength <целое число>
 //         signature <строка> | <ArrayBuffer> | <Буфер> | <TypedArray> | <DataView>
-//         signatureEncoding <строка> кодирования из signatureстроки.
-//         Возвращает: <boolean> true или в falseзависимости от действительности подписи для данных и открытого ключа.
-//             Проверяет предоставленные данные с помощью заданных objectи signature.
+//         signatureEncoding <строка> кодирования из signature строки.
+//         Возвращает: <boolean> true или в false зависимости от действительности подписи для данных и открытого ключа.
+//             Проверяет предоставленные данные с помощью заданных object и signature.
 //
-//             Если objectне a KeyObject, эта функция ведет себя так, как если бы objectона была передана в
+//             Если object не a KeyObject, эта функция ведет себя так, как если бы object она была передана в
 //             crypto.createPublicKey(). Если это объект, можно передать следующие дополнительные свойства:
 //
 //             dsaEncoding <string> Для DSA и ECDSA эта опция определяет формат подписи. Это может быть одно из
 //                 следующих значений:
 //
 //                 'der'(по умолчанию): кодирование структуры подписи ASN.1 в формате DER (r, s).
-//                 'ieee-p1363': Формат подписи, r || sпредложенный в IEEE-P1363.
+//                 'ieee-p1363': Формат подписи, r || s предложенный в IEEE-P1363.
 //                 padding <integer> Необязательное значение заполнения для RSA, одно из следующих:
 //
 //                     crypto.constants.RSA_PKCS1_PADDING (дефолт)
 //                     crypto.constants.RSA_PKCS1_PSS_PADDING
-//                     RSA_PKCS1_PSS_PADDINGбудет использовать MGF1 с той же хэш-функцией, которая использовалась
+//                     RSA_PKCS1_PSS_PADDING будет использовать MGF1 с той же хэш-функцией, которая использовалась
 //                     для проверки сообщения, как указано в разделе 3.1 RFC 4055 , если только хеш-функция MGF1 не
 //                     была указана как часть ключа в соответствии с разделом 3.3 RFC 4055 .
 //
 //  saltLength <целое число> Длина соли при заполнении RSA_PKCS1_PSS_PADDING. Специальное значение
-//  crypto.constants.RSA_PSS_SALTLEN_DIGESTустанавливает длину соли crypto.constants.RSA_PSS_SALTLEN_AUTO равной
+//  crypto.constants.RSA_PSS_SALTLEN_DIGEST устанавливает длину соли crypto.constants.RSA_PSS_SALTLEN_AUTO равной
 //  размеру дайджеста, (по умолчанию) заставляет его определять автоматически.
 //
 //  signatureАргумент ранее рассчитаны подписи для данных, в signatureEncoding. Если signatureEncoding указано a,

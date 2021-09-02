@@ -54,17 +54,18 @@ function megaCalcPath(sourcePath, targetPath, length1, length2, action = '+', cb
         if (err) {
             throw new Error(err);
         }
-        const digits = data.match(/[0-9]/g);
-        let string = '';
-        digits.forEach((item) => {
-            string += item;
-        })
+        const digits = data.match(/\d/g).join('');
 
-        fs.writeFile(targetPath, string, {encoding: 'utf8', flag: 'w'}, (err, data) => {
+        fs.writeFile(targetPath, digits, {encoding: 'utf8', flag: 'w'}, (err, data) => {
             if (err) {
                 throw new Error(err);
             }
-            console.log(data)
+            fs.readFile(targetPath, {encoding: 'utf8', flag: 'r+'}, (err, data) => {
+                if (err) {
+                    throw new Error(err);
+                }
+
+            })
 
         })
     })
