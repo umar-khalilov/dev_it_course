@@ -13,33 +13,27 @@ const path = require('path'), fs = require('fs');
 // console.groupEnd();
 // console.log("Back to the outer level");
 
-// console.log("\x1b[31m",__dirname)
 let files = 0, folders = 0;
 
-function createDirTree(dirPath) {
-    fs.readdir(dirPath, (err, list) => {
+function buildDirTree(dirPath) {
+    fs.readdir(dirPath, {withFileTypes: true}, (err, list) => {
         if (err) {
             throw new Error(err);
         }
-        list.forEach(item => {
-            let filePath = path.join(dirPath, item)
-            let stat = fs.statSync(filePath);
-            if (stat.isFile()) {
-                ++files;
-                console.group("\x1b[32m", filePath);
-
-            }
-            if (stat.isDirectory()) {
+        console.log("\x1b[33m", dirPath);
+        console.group();
+        for (let item of list) {
+            if (item.isDirectory()) {
+                buildDirTree(path.join(dirPath, item.name))
                 ++folders;
-                console.group("\x1b[33m", filePath)
-                createDirTree(filePath)
-
+            } else {
+                console.log("\x1b[32m", item.name)
+                ++files;
             }
-
-        })
-        console.log(`${files} ${folders}`)
+        }
+        console.log(`Total files: ${files}!, folders ${folders}`);
     })
-
+    console.groupEnd()
 }
 
-createDirTree('../')
+buildDirTree('..')

@@ -12,22 +12,19 @@ const findFile = (fileName, dirPath = __dirname, cb) => {
                 if (err) {
                     throw new Error(err);
                 }
-                const path_ = path.join(dirPath, file);
+                const pathDir = path.join(dirPath, file);
                 if (status.isDirectory()) {
                     console.log(file);
-                    findFile(fileName, path_, cb);
+                    findFile(fileName, pathDir, cb);
                 }
-
                 if (status.isFile()) {
                     console.log(file);
                 }
                 if (file === fileName) {
-                    return cb(err, path_);
+                    return cb(err, pathDir);
                 }
-
             });
         }
-
     });
 }
 
