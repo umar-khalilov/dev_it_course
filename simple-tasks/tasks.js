@@ -93,3 +93,115 @@ function arrToObject(arrOfObj) {
 	return Object.assign({}, ...arrOfObj);
 }
 console.log(arrToObject([{ a: 1 }, { b: 2, c: 3 }]));
+
+const words = [
+    'Beachball',
+    'Rodeo',
+    'Angel',
+    'Aardvark',
+    'Xylophone',
+    'November',
+    'Chocolate',
+    'Papaya',
+    'Uniform',
+    'Joker',
+    'Clover',
+    'Bali',
+];
+
+const alphabetical = words.reduce((acc, item) => {
+    if (!acc[item[0]]) {
+        acc[item[0]] = [];
+    }
+    acc[item[0]].push(item);
+    return acc;
+}, {});
+
+const hasLeapYear = year => {
+    let isLeapYear = null;
+    if (year % 4 !== 0) {
+        isLeapYear = false;
+    } else if (year % 100 !== 0) {
+        isLeapYear = true;
+    } else if (year % 400 !== 0) {
+        isLeapYear = false;
+    } else {
+        isLeapYear = true;
+    }
+    return isLeapYear;
+};
+
+Function.prototype.delay = function (timeout = 1000) {
+    return function (...args) {
+        setTimeout(() => {
+            this(...args);
+        }, timeout);
+    }.bind(this);
+};
+
+function someFn() {
+    console.log(...arguments);
+}
+
+const someFnWithDelay = someFn.delay(2000);
+
+someFnWithDelay('arg1', {}, [], 2);
+
+console.log(alphabetical);
+console.log(hasLeapYear(2023));
+
+function numberCardinality(myNumber = '') {
+    const arrNum = myNumber.split('');
+    if (+arrNum[arrNum.length - 1] === 0) {
+        return 'zero';
+    }
+
+    if (+arrNum[arrNum.length - 1] === 5) {
+        return 'five';
+    }
+    const number = parseInt(myNumber, 10);
+    if (number % 2 === 0) {
+        return 'even';
+    }
+    if (number % 2 === 1) {
+        return 'odd';
+    }
+}
+
+console.log(numberCardinality('100'));
+console.log(numberCardinality('88'));
+console.log(numberCardinality('155'));
+console.log(numberCardinality('99'));
+
+function removeNSmallest(n, arr = []) {
+    if (n > arr.length) return [];
+    if (n <= 0) return arr;
+
+    for (let i = 1; i <= n; i++) {
+        let smallestNumber = Math.min(...arr);
+        arr = arr.filter(item => item !== smallestNumber);
+    }
+    return arr;
+}
+
+console.log(removeNSmallest(2, [5, 3, 2, 1, 4]));
+
+function fibonacciSeriesPrinter(number) {
+    function* fibonacciSeries(number) {
+        if (number === 0) {
+            return [0];
+        } else if (number === 1) {
+            return [1, 1];
+        } else {
+            let arr2 = fibonacciSeries(number - 2).next().value;
+            let arr1 = fibonacciSeries(number - 1).next().value;
+            arr1.push(arr1[arr1.length - 1] + arr2[arr2.length - 1]);
+            return arr1;
+        }
+    }
+    const sequence = fibonacciSeries(number).next().value;
+    sequence.shift();
+    return sequence;
+}
+
+console.log(fibonacciSeriesPrinter(8));
