@@ -33,7 +33,7 @@ export class JSUtils {
 		}
 	};
 
-	calcSumSequence = num => (num === 1 ? num : num + calcSumSequence(num - 1));
+	calcSumSequence = num => (num === 1 ? num : num + this.calcSumSequence(num - 1));
 
 	createMultiplicationTable = upperLimit => {
 		for (let i = 1; i <= 10; i++) {
