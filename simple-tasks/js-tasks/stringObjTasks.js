@@ -1,7 +1,7 @@
 'use strict';
 
-/*1. Написать метод защиты email (например для не залогиненых пользователей)
-Синтаксис: protect_email(email: string, replacer: string = '*' ): string*/
+// 1. Написать метод защиты email (например для не залогиненых пользователей)
+// 	  Синтаксис: protectEmail(email: string, replacer: string = '*' ): string
 const protectEmail = (email, replacer) => {
 	let protectedEmail = '';
 	for (let i = 1; i < email.length; i++) {
@@ -16,9 +16,9 @@ const protectEmail = (email, replacer) => {
 console.log(protectEmail('robin_singh@example.com', '#'));
 console.log(protectEmail('test@gmail.com', '#'));
 
-/*2. Написать метод который переводит символы в строке с нижнего регистра в верхний (c верхнего в нижний) +
-    может перемешивать строку.
-    Синтаксис: swapcase(str: string, shuffle: boolean = false): string*/
+// 2. Написать метод который переводит символы в строке с нижнего регистра в верхний (c верхнего в нижний) +
+//    может перемешивать строку.
+//    Синтаксис: swapCase(str: string, shuffle: boolean = false): string
 function swapCase(str, shuffle = false) {
 	let changedStr = '';
 	let changedShuffleStr = '';
@@ -40,9 +40,9 @@ function swapCase(str, shuffle = false) {
 
 console.log(swapCase('AaBbc', true));
 
-/* 3. Написать метод text_truncate который обрезает текст до указаного значения(по умолчанию 100)
-и в конец добавляет символы (по умолчанию ...)
-Синтаксис: text_truncate(str: string, length: number = 100, ending: string = '...'): string*/
+// 3. Написать метод textTruncate который обрезает текст до указаного значения(по умолчанию 100)
+// 	  и в конец добавляет символы (по умолчанию ...)
+//    Синтаксис: text_truncate(str: string, length: number = 100, ending: string = '...'): string
 const textTruncate = (str, length = 100, ending = '...') => {
 	if (str.length < length) {
 		return str.substring(0, length);
@@ -54,18 +54,17 @@ console.log(textTruncate('Lorem ipsum dolor sit amet, consectetur adipiscing eli
 console.log(textTruncate('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 19));
 console.log(textTruncate('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 15, '!!'));
 
-/*4. Написать метод chunk_str который убирает из строки все пробелы и разбивает ее на чанки указаного размера.
-    Синтаксис: chunk_str(str: string, size: number = 1, trim: boolean = true): string[]*/
+// 4. Написать метод chunkStr который убирает из строки все пробелы и разбивает ее на чанки указаного размера.
+//    Синтаксис: chunk_str(str: string, size: number = 1, trim: boolean = true): string[]
 const chunkStr = (str, size = 1, trim = true) =>
 	trim ? str.trim().match(new RegExp('.{1,' + size + '}', 'g')) : str.match(new RegExp('.{1,' + size + '}', 'g'));
 
 console.log(chunkStr('consectetur    ', 3));
 
-/*5. Написать метод который переводит целое число к Римскому и обратный метод Римское к целому.
-    Синтаксис:
-    romanToInt(str: string): number;
-    intToRoman(int: number): string;*/
-
+// 5. Написать метод который переводит целое число к Римскому и обратный метод Римское к целому.
+//    Синтаксис:
+//    romanToInt(str: string): number;
+//    intToRoman(int: number): string;
 function romanToInt(str) {
 	if (typeof str !== 'string') {
 		return null;
@@ -103,13 +102,12 @@ function intToRoman(int) {
 console.log(romanToInt('XXVI')); // 26
 console.log(intToRoman(26)); // 'XXVI'
 
-/*7. Метод "подбора карточных паролей" этот метод принимает набор символов из 4 цифр из которых теоретически может состоять пароль.
-    Метод должен вернуть массив всех возможных уникальных комбинаций.
-+ я могу использовать маску в строке ввиде знака ?(это значит что тут может быть любая цифра от 0-9)
-+ если я точно знаю что пароль начинаеться с 9 я могу добавить символ ^ перед первой цифрой например '^9123'
-+ также я могу точно знать последнию цифру тогда я использую знак $ в конце например '9123$' --> 3 всегда последняя
-+ я могу использовать комбинации из всех масок например '^1??0$' -- точно начинаеться с 1 и заканчиваться 0 внутри любые от 0-9*/
-
+// 7. Метод "подбора карточных паролей" этот метод принимает набор символов из 4 цифр из которых теоретически может состоять пароль.
+//    Метод должен вернуть массив всех возможных уникальных комбинаций.
+// + я могу использовать маску в строке ввиде знака ?(это значит что тут может быть любая цифра от 0-9)
+// + если я точно знаю что пароль начинаеться с 9 я могу добавить символ ^ перед первой цифрой например '^9123'
+// + также я могу точно знать последнию цифру тогда я использую знак $ в конце например '9123$' --> 3 всегда последняя
+// + я могу использовать комбинации из всех масок например '^1??0$' -- точно начинаеться с 1 и заканчиваться 0 внутри любые от 0-9
 function combinePass(str, regExp) {
 	const result = [];
 	for (let i = 1; i < Math.pow(2, str.length) - 1; i++) {
@@ -121,10 +119,10 @@ function combinePass(str, regExp) {
 	return result;
 }
 
-// console.log(combinePass('9123', /^9123?/));
+console.log(combinePass('9123', /^9123?/));
 
-/* 8. Написать метод который принимает на вход любой объект и возвращает сам объект его свойства и методы
-цепочку из его прототипов(свойства и методы) в виде JSON.*/
+// 8. Написать метод который принимает на вход любой объект и возвращает сам объект его свойства и методы
+//    цепочку из его прототипов(свойства и методы) в виде JSON.
 function getObjectWithProp(object) {
 	const serialized = JSON.stringify(
 		object,

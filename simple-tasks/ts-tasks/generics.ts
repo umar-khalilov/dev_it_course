@@ -1,5 +1,5 @@
-/*1. Функция принимает массив строк или цифр, возвращает длину массива.
-    Синтаксис: getLength(arr: T[]): number*/
+// 1. Функция принимает массив строк или цифр, возвращает длину массива.
+//    Синтаксис: getLength(arr: T[]): number
 interface MyLength {
     length: number;
 }
@@ -9,14 +9,14 @@ function getLength<T extends number | string>(arr: T[]): string {
 }
 
 const arr = [2, 4, 3, 2, 1];
-const strArr = ['fgdf', 'erge']
+const strArr = ['fgdf', 'erge'];
 const str: string = 'lrlalwe';
-console.log(getLength(arr))
-console.log(getLength(strArr))
+console.log(getLength(arr));
+console.log(getLength(strArr));
 
 
-/*2. Функция принимает обьект и ключ, возвращает значение ключа.
-    Синтаксис: getValue(obj: T, key: R)*/
+// 2. Функция принимает обьект и ключ, возвращает значение ключа.
+//    Синтаксис: getValue(obj: T, key: R)
 function getValue<T extends object, R extends keyof T>(obj: T, key: R): T[R] {
     return obj[key];
 }
@@ -25,12 +25,12 @@ const person = {
     name: 'TestName',
     age: 22,
     job: 'developer'
-}
+};
 
-console.log(getValue(person, 'name'))
+console.log(getValue(person, 'name'));
 
-/*3. Функция принимает два объекта, возвращает объединённый объект.
-    Синтаксис: mergeObject(obj1: T, obj2: R):T & R*/
+// 3. Функция принимает два объекта, возвращает объединённый объект.
+//    Синтаксис: mergeObject(obj1: T, obj2: R):T & R
 function mergeObject<T extends object, R extends object>(obj1: T, obj2: R): T & R {
-    return Object.assign({}, obj1, obj2)
+    return Object.assign({}, obj1, obj2);
 }

@@ -9,7 +9,7 @@ export class Boss extends Employee {
     }
 
     addSlave(person) {
-        if (!person instanceof Employee) {
+        if(!person instanceof Employee) {
             throw new Error('Person must be an instance of the employee');
         }
         this.#slaves.push(person);
@@ -17,7 +17,7 @@ export class Boss extends Employee {
 
     removeSlave(personId) {
         const indexToDelete = this.#slaves.findIndex(slave => slave.id === personId);
-        if (!indexToDelete) {
+        if(!indexToDelete) {
             throw new Error(`There is no such a person with id ${personId}`);
         }
         return this.#slaves.splice(indexToDelete, 1)[0];

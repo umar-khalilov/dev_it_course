@@ -23,11 +23,11 @@ class MyTransform extends Transform {
 	check() {
 		const diff = Date.now() - this.timeshtamp;
 
-		if (diff > 1000) {
+		if(diff > 1000) {
 			return 0;
 		}
 
-		if (this.count < this.throttle * 1024) {
+		if(this.count < this.throttle * 1024) {
 			return 0;
 		}
 
@@ -36,7 +36,7 @@ class MyTransform extends Transform {
 
 	update(size) {
 		this.count += size;
-		if (Date.now() - this.timeshtamp > 1000) {
+		if(Date.now() - this.timeshtamp > 1000) {
 			this.count = 0;
 			this.timeshtamp = Date.now();
 		}
@@ -44,7 +44,7 @@ class MyTransform extends Transform {
 }
 
 class MyDuplex extends Duplex {
-	_read(size) {}
+	_read(size) { }
 
 	_write(chunk, encoding, callback) {
 		this.push(chunk);
@@ -56,8 +56,8 @@ class MyDuplex extends Duplex {
 			stdout.cursorTo(x, y);
 			stdout.write(progress);
 			x++;
-			if (stdout.column - 6 === x) {
-				stdout.clearLine(0, () => {});
+			if(stdout.column - 6 === x) {
+				stdout.clearLine(0, () => { });
 				x--;
 			}
 		}, 100);
@@ -79,7 +79,7 @@ const transform = new MyTransform({ throttle: argv[2] });
 const duplex = new MyDuplex();
 
 pipeline(readStream, transform, duplex, writeStream, err => {
-	if (err) {
+	if(err) {
 		throw new Error(err);
 	}
 });

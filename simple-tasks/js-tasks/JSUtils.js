@@ -1,7 +1,7 @@
 export class JSUtils {
 	addFunc = () => {
 		const operations = [];
-		for (let i = 0; i < 5; i++) {
+		for(let i = 0;i < 5;i++) {
 			operations.push(() => console.log(i));
 		}
 		operations.forEach(fn => fn());
@@ -10,10 +10,10 @@ export class JSUtils {
 	isEqual = (a, b) => Math.abs(a) - Math.abs(b) < Number.EPSILON;
 
 	pow = (base, exp) => {
-		if (exp === 1) {
+		if(exp === 1) {
 			return base;
 		}
-		if (exp === 0) {
+		if(exp === 0) {
 			return 1;
 		}
 		return base * pow(base, exp - 1);
@@ -25,7 +25,7 @@ export class JSUtils {
 		let num3 = 1;
 		let num4;
 		console.log(num1 + '\t');
-		while (num2 <= upNum) {
+		while(num2 <= upNum) {
 			num4 = num1 + num2 + num3;
 			console.log(num2 + '\t');
 			num2 = num3;
@@ -36,17 +36,17 @@ export class JSUtils {
 	calcSumSequence = num => (num === 1 ? num : num + this.calcSumSequence(num - 1));
 
 	createMultiplicationTable = upperLimit => {
-		for (let i = 1; i <= 10; i++) {
-			for (let j = 1; j <= upperLimit; j++) {
+		for(let i = 1;i <= 10;i++) {
+			for(let j = 1;j <= upperLimit;j++) {
 				console.log(`${j} x ${i} = ${i * j}` + '\t');
 			}
 			console.log('\n');
 		}
 	};
-	/*Задачи для работы со строками */
-	// 1. Функция меняет регистр букв переданой строки - если буква в верхнем - перевод в нижний и наоборот (teSTsTRing -> TEstStrING)
+	//	 Задачи для работы со строками
+	//	 1. Функция меняет регистр букв переданой строки - если буква в верхнем - перевод в нижний и наоборот (teSTsTRing -> TEstStrING)
 	getChangeCaseString = string => {
-		if (
+		if(
 			typeof string === 'object' ||
 			typeof string === 'undefined' ||
 			typeof string === 'function' ||
@@ -56,15 +56,15 @@ export class JSUtils {
 		}
 		let character = '';
 		let changedCaseString = '';
-		for (let i = 0; i < string.length; i++) {
+		for(let i = 0;i < string.length;i++) {
 			character = string.charAt(i);
-			if (!isNaN(character * 1)) {
+			if(!isNaN(character * 1)) {
 				throw new TypeError('You input wrong data');
 			}
-			if (character === character.toLowerCase()) {
+			if(character === character.toLowerCase()) {
 				changedCaseString += character.toUpperCase();
 			}
-			if (character === character.toUpperCase()) {
+			if(character === character.toUpperCase()) {
 				changedCaseString += character.toLowerCase();
 			}
 		}
@@ -81,7 +81,7 @@ export class JSUtils {
 	// 1. Сгенерировать случайное целое число в указанном диапазоне и перевести его в указанную систему счисления
 	generateIntNumber = (start = 0, end = 10, scaleOfNotation = 10) => {
 		const checkInput = start + end + scaleOfNotation;
-		if (isNaN(checkInput)) {
+		if(isNaN(checkInput)) {
 			return null;
 		}
 		start = Math.ceil(start);
@@ -92,10 +92,10 @@ export class JSUtils {
 
 	// 2. Написать функцию, которая преобразовывает переданное число в отрицательное
 	getNegativeNumber = number => {
-		if (isNaN(number)) {
+		if(isNaN(number)) {
 			return null;
 		}
-		if (Math.sign(number) === 1) {
+		if(Math.sign(number) === 1) {
 			return number * -1;
 		}
 		return false;
@@ -103,23 +103,22 @@ export class JSUtils {
 
 	// 3. Посчитать расстояние между двумя заданными точками (x; y), округлить в большую сторону и найти факториал результата
 	calcDistanceAndGetFactorial = (from = 0, to = 10) => {
-		if (isNaN(from + to)) {
+		if(isNaN(from + to)) {
 			return null;
 		}
 		const distance = Math.ceil(to - from);
-		if (distance === 1) {
+		if(distance === 1) {
 			return 1;
 		}
 		let sum = 1;
-		for (let i = 1; i <= distance; i++) {
+		for(let i = 1;i <= distance;i++) {
 			sum = sum * i;
 		}
 		return sum;
 	};
 
-	/*1.Написать функцию которая распаковывает массив любой вложености.
-    Делает выборку чисел.
-    И сумирует все найденные числа.*/
+	// 1.Написать функцию которая распаковывает массив любой вложености.
+	// Делает выборку чисел и сумирует все найденные числа.
 	getFoldedArray = nestedArr =>
 		nestedArr
 			.flat(Infinity)
@@ -136,7 +135,7 @@ export class JSUtils {
 	// 3.Развернуть массив по x и по y. Не мутируя изначальный массив
 	reverseArrToXAndY = array => {
 		const reversedArr = [];
-		for (let i = array.length - 1; i >= 0; i--) {
+		for(let i = array.length - 1;i >= 0;i--) {
 			reversedArr.push(array[i].slice().reverse());
 		}
 		return reversedArr;
@@ -160,8 +159,8 @@ export class JSUtils {
 	getTheLastDayOfTheMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 
 	// Задачи на замыкания
-	/*    1. Написать счётчик замыкания с возможностью инкремента, декремента и ресета,
-        который считает каждое действие(инкремента, дек, рес) и выводит общее количество вызовов отдельным методом*/
+	// 1. Написать счётчик замыкания с возможностью инкремента, декремента и ресета,
+	// который считает каждое действие(инкремента, дек, рес) и выводит общее количество вызовов отдельным методом.
 	makeCounter = count => () => ({
 		increment: () => ++count,
 		decrement: () => --count,
@@ -182,13 +181,13 @@ export class JSUtils {
 		};
 	})();
 
-	/*    3. Написать функцию, каждый вызов который будет генерировать случайные числа от 1 до 100,
-        но так чтобы они не повторялись, иначе null*/
+	// 3. Написать функцию, каждый вызов который будет генерировать случайные числа от 1 до 100,
+	// но так чтобы они не повторялись, иначе null.
 	makeRandom = () => {
 		const result = [];
 		return () => {
 			const randomNumber = Math.floor(Math.random() * 10);
-			if (!result.includes(randomNumber)) {
+			if(!result.includes(randomNumber)) {
 				result.push(randomNumber);
 				return result;
 			}

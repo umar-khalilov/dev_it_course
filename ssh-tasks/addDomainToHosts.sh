@@ -9,9 +9,8 @@ ipAndDomain="${ipAddress} ${hostName}"
 
 echo "Please enter your password for confirmation"
 
-if (( ! -z "$matchesInHosts"));
-then
- echo "Updating existing Ip and Domain"
+if ((! -z "$matchesInHosts")); then
+ 	echo -e "Updating existing Ip and Domain"
  while read -r lineNumber; do
  	sudo sed -i '' "${lineNumber}s/.*/${ipAndDomain} /" /etc/hosts
  done <<< "$matchesInHosts"
